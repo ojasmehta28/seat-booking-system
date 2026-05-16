@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 
-public class BookingRepsonseDTO { // DTO class to represent the response of a booking operation
+public class BookingResponseDTO { // DTO class to represent the response of a booking operation
 
     private Long bookingId; // ID of the booking
 
