@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SeatService {
+public class SeatService { //Service for handling seat related operations
 
     @Autowired
     private SeatRepository seatRepository;
