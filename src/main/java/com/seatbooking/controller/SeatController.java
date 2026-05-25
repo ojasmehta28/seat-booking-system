@@ -4,17 +4,16 @@ import com.seatbooking.entity.Seat;
 import com.seatbooking.service.SeatService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*; //importing necessary annotations for REST controller and request mapping
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/seats")
-public class SeatController {
+public class SeatController { //seatcontroller used for input and output of seat related operations
 
     @Autowired
     private SeatService seatService;
-
     
     // Create seat
     @PostMapping

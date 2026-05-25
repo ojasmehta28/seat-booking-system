@@ -1,6 +1,8 @@
 package com.seatbooking.entity;
 
-import jakarta.persistence.*; // JPA annotations for entity mapping
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -16,15 +18,27 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    
+    @NotBlank(message = "Event name is required")
     private String name;
 
-    private String eventType; // MOVIE / CRICKET / CONCERT
+    
+    @NotBlank(message = "Event type is required")
+    private String eventType;
 
-    private LocalDateTime eventStartTime; // When the event starts
+    
+    @NotNull(message = "Event start time is required")
+    private LocalDateTime eventStartTime;
 
-    private LocalDateTime bookingOpenTime; // When the booking opens for the event
+    
+    @NotNull(message = "Booking open time is required")
+    private LocalDateTime bookingOpenTime;
 
-    private LocalDateTime bookingCloseTime; // When the booking closes for the event
+    
+    @NotNull(message = "Booking close time is required")
+    private LocalDateTime bookingCloseTime;
 
-    private Integer maxSeatsPerUser; // Maximum number of seats a user can book for this event
+    
+    @Min(value = 1, message = "Minimum seat limit should be 1")
+    private Integer maxSeatsPerUser;
 }
