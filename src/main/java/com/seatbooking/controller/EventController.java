@@ -3,32 +3,33 @@ package com.seatbooking.controller;
 import com.seatbooking.entity.Event;
 import com.seatbooking.service.EventService;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@RestController //Indicates that this class is a REST controller, handling HTTP requests and returning responses in JSON format
+
+@RestController
 @RequestMapping("/events")
-public class EventController { //Controller for handling event related requests
+public class EventController {
 
     @Autowired
     private EventService eventService;
 
-    //Create new Event
+    
+    // Create new event
     @PostMapping
-    public Event createEvent(@RequestBody Event event){ //Endpoint to create a new event, accepting event details in the request body
+    public Event createEvent(@Valid @RequestBody Event event) {
 
         return eventService.createEvent(event);
     }
 
-    //Fetch all events
+    
+    // Fetch all events
     @GetMapping
-    public List<Event> getAllEvents(){ //Endpoint to fetch all events
+    public List<Event> getAllEvents() {
 
         return eventService.getAllEvents();
     }
-
-
-
-
 }
