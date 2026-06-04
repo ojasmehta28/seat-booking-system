@@ -3,8 +3,7 @@ package com.seatbooking.exception;
 import org.springframework.http.HttpStatus; //importing necessary classes for handling HTTP status codes
 import org.springframework.http.ResponseEntity; //importing ResponseEntity for returning responses from exception handlers
 import org.springframework.web.bind.MethodArgumentNotValidException; //importing exception class for handling validation errors
-import org.springframework.web.bind.annotation.ControllerAdvice; //importing annotation for global exception handling
-
+//importing annotation for global exception handling
 import org.springframework.web.bind.annotation.*; //importing necessary annotations for handling specific exceptions
 
 import java.util.HashMap; //importing HashMap for storing error messages
@@ -40,5 +39,18 @@ public class GlobalExceptionHandler {
         ); //returning the response entity with the error details and a BAD_REQUEST status code
 
         }
+        @ExceptionHandler(BookingException.class)
+public ResponseEntity<Map<String, Object>> handleBookingException(
+        BookingException ex) {
+
+    Map<String, Object> response = new HashMap<>();
+
+    response.put("message", ex.getMessage());
+
+    return new ResponseEntity<>(
+            response,
+            HttpStatus.BAD_REQUEST
+    );
+}
 
 }
