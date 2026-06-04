@@ -1,14 +1,34 @@
 package com.seatbooking.dto;
 
-import lombok.Data;
 import java.util.List;
-@Data
+
 public class BookingRequestDTO {
 
-    private Long eventId; // ID of the event for which the booking is being made
+    private Long eventId;
+    private List<Long> seatIds;
+    private Long userId;
 
-    private List<Long> seatIds; // List of seat IDs that the user wants to book
+    public Long getEventId() {
+        return eventId;
+    }
 
-    private Long userId; // ID of the user making the booking
+    public void setEventId(Long eventId) {
+        this.eventId = eventId;
+    }
 
+    public List<Long> getSeatIds() {
+        return seatIds;
+    }
+
+    public void setSeatIds(List<Long> seatIds) {
+        this.seatIds = seatIds;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 }
