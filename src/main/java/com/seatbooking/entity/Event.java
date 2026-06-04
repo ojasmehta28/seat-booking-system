@@ -3,15 +3,15 @@ package com.seatbooking.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
-import lombok.*;
+//import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "event")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+// @Data
+// @NoArgsConstructor
+// @AllArgsConstructor
 public class Event {
 
     @Id
@@ -41,4 +41,63 @@ public class Event {
     
     @Min(value = 1, message = "Minimum seat limit should be 1")
     private Integer maxSeatsPerUser;
+
+    public Event() {
+}
+
+public Long getId() {
+    return id;
+}
+
+public void setId(Long id) {
+    this.id = id;
+}
+
+public String getName() {
+    return name;
+}
+
+public void setName(String name) {
+    this.name = name;
+}
+
+public String getEventType() {
+    return eventType;
+}
+
+public void setEventType(String eventType) {
+    this.eventType = eventType;
+}
+
+public LocalDateTime getEventStartTime() {
+    return eventStartTime;
+}
+
+public void setEventStartTime(LocalDateTime eventStartTime) {
+    this.eventStartTime = eventStartTime;
+}
+
+public LocalDateTime getBookingOpenTime() {
+    return bookingOpenTime;
+}
+
+public void setBookingOpenTime(LocalDateTime bookingOpenTime) {
+    this.bookingOpenTime = bookingOpenTime;
+}
+
+public LocalDateTime getBookingCloseTime() {
+    return bookingCloseTime;
+}
+
+public void setBookingCloseTime(LocalDateTime bookingCloseTime) {
+    this.bookingCloseTime = bookingCloseTime;
+}
+
+public Integer getMaxSeatsPerUser() {
+    return maxSeatsPerUser;
+}
+
+public void setMaxSeatsPerUser(Integer maxSeatsPerUser) {
+    this.maxSeatsPerUser = maxSeatsPerUser;
+}
 }
