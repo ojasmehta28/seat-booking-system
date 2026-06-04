@@ -21,7 +21,7 @@ public class BookingController {
     @PostMapping
     public BookingResponseDTO createBooking(
 
-    @Valid    @RequestBody BookingRequestDTO request) {
+    @Valid    @RequestBody BookingRequestDTO request) { // Validating the incoming request body against the constraints defined in BookingRequestDTO
 
             Booking booking= bookingService.createBooking(
                 request.getEventId(),

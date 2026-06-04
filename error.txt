@@ -1,0 +1,227 @@
+[INFO] Error stacktraces are turned on.
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< com.seatbooking:seatbooking >---------------------
+[INFO] Building seatbooking 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ seatbooking ---
+[INFO] Deleting C:\Users\ASUS LAPTOP\Downloads\seatbooking\seatbooking\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ seatbooking ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ seatbooking ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 21 source files with javac [debug parameters release 17] to target\classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/bookingengine/BookingEngine.java:[24,33] cannot find symbol
+  symbol:   method getBookingOpenTime()
+  location: variable event of type com.seatbooking.entity.Event
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/bookingengine/BookingEngine.java:[25,34] cannot find symbol
+  symbol:   method getBookingCloseTime()
+  location: variable event of type com.seatbooking.entity.Event
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/bookingengine/BookingEngine.java:[26,34] cannot find symbol
+  symbol:   method getEventStartTime()
+  location: variable event of type com.seatbooking.entity.Event
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/bookingengine/BookingEngine.java:[34,21] cannot find symbol
+  symbol:   method getStatus()
+  location: variable seat of type com.seatbooking.entity.Seat
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/bookingengine/BookingEngine.java:[45,17] cannot find symbol
+  symbol:   method setStatus(java.lang.String)
+  location: variable seat of type com.seatbooking.entity.Seat
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/bookingengine/BookingEngine.java:[46,17] cannot find symbol
+  symbol:   method setLockedByUser(java.lang.Long)
+  location: variable seat of type com.seatbooking.entity.Seat
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/bookingengine/BookingEngine.java:[49,17] cannot find symbol
+  symbol:   method setLockExpiryTime(java.time.LocalDateTime)
+  location: variable seat of type com.seatbooking.entity.Seat
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/controller/BookingController.java:[25,24] cannot find symbol
+  symbol:   method getEventId()
+  location: variable request of type com.seatbooking.dto.BookingRequestDTO
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/controller/BookingController.java:[26,24] cannot find symbol
+  symbol:   method getUserId()
+  location: variable request of type com.seatbooking.dto.BookingRequestDTO
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/controller/BookingController.java:[27,24] cannot find symbol
+  symbol:   method getSeatIds()
+  location: variable request of type com.seatbooking.dto.BookingRequestDTO
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/controller/BookingController.java:[34,24] cannot find symbol
+  symbol:   method getTotalAmount()
+  location: variable booking of type com.seatbooking.entity.Booking
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/controller/BookingController.java:[33,24] cannot find symbol
+  symbol:   method getStatus()
+  location: variable booking of type com.seatbooking.entity.Booking
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/controller/BookingController.java:[32,24] cannot find symbol
+  symbol:   method getId()
+  location: variable booking of type com.seatbooking.entity.Booking
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/service/BookingService.java:[66,34] cannot find symbol
+  symbol:   method getMaxSeatsPerUser()
+  location: variable event of type com.seatbooking.entity.Event
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/service/BookingService.java:[79,16] cannot find symbol
+  symbol:   method setUserId(java.lang.Long)
+  location: variable booking of type com.seatbooking.entity.Booking
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/service/BookingService.java:[81,16] cannot find symbol
+  symbol:   method setEvent(com.seatbooking.entity.Event)
+  location: variable booking of type com.seatbooking.entity.Booking
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/service/BookingService.java:[83,16] cannot find symbol
+  symbol:   method setStatus(java.lang.String)
+  location: variable booking of type com.seatbooking.entity.Booking
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/service/BookingService.java:[85,16] cannot find symbol
+  symbol:   method setCreatedAt(java.time.LocalDateTime)
+  location: variable booking of type com.seatbooking.entity.Booking
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/service/BookingService.java:[92,32] cannot find symbol
+  symbol:   method getZone()
+  location: variable seat of type com.seatbooking.entity.Seat
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/service/BookingService.java:[95,16] cannot find symbol
+  symbol:   method setTotalAmount(double)
+  location: variable booking of type com.seatbooking.entity.Booking
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/service/BookingService.java:[104,24] cannot find symbol
+  symbol:   method setBooking(com.seatbooking.entity.Booking)
+  location: variable bookingSeat of type com.seatbooking.entity.BookingSeat
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/service/BookingService.java:[105,24] cannot find symbol
+  symbol:   method setSeat(com.seatbooking.entity.Seat)
+  location: variable bookingSeat of type com.seatbooking.entity.BookingSeat
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/service/BookingService.java:[109,17] cannot find symbol
+  symbol:   method setStatus(java.lang.String)
+  location: variable seat of type com.seatbooking.entity.Seat
+[INFO] 23 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.454 s
+[INFO] Finished at: 2026-06-04T23:59:16+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile (default-compile) on project seatbooking: Compilation failure: Compilation failure: 
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/bookingengine/BookingEngine.java:[24,33] cannot find symbol
+[ERROR]   symbol:   method getBookingOpenTime()
+[ERROR]   location: variable event of type com.seatbooking.entity.Event
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/bookingengine/BookingEngine.java:[25,34] cannot find symbol
+[ERROR]   symbol:   method getBookingCloseTime()
+[ERROR]   location: variable event of type com.seatbooking.entity.Event
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/bookingengine/BookingEngine.java:[26,34] cannot find symbol
+[ERROR]   symbol:   method getEventStartTime()
+[ERROR]   location: variable event of type com.seatbooking.entity.Event
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/bookingengine/BookingEngine.java:[34,21] cannot find symbol
+[ERROR]   symbol:   method getStatus()
+[ERROR]   location: variable seat of type com.seatbooking.entity.Seat
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/bookingengine/BookingEngine.java:[45,17] cannot find symbol
+[ERROR]   symbol:   method setStatus(java.lang.String)
+[ERROR]   location: variable seat of type com.seatbooking.entity.Seat
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/bookingengine/BookingEngine.java:[46,17] cannot find symbol
+[ERROR]   symbol:   method setLockedByUser(java.lang.Long)
+[ERROR]   location: variable seat of type com.seatbooking.entity.Seat
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/bookingengine/BookingEngine.java:[49,17] cannot find symbol
+[ERROR]   symbol:   method setLockExpiryTime(java.time.LocalDateTime)
+[ERROR]   location: variable seat of type com.seatbooking.entity.Seat
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/controller/BookingController.java:[25,24] cannot find symbol
+[ERROR]   symbol:   method getEventId()
+[ERROR]   location: variable request of type com.seatbooking.dto.BookingRequestDTO
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/controller/BookingController.java:[26,24] cannot find symbol
+[ERROR]   symbol:   method getUserId()
+[ERROR]   location: variable request of type com.seatbooking.dto.BookingRequestDTO
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/controller/BookingController.java:[27,24] cannot find symbol
+[ERROR]   symbol:   method getSeatIds()
+[ERROR]   location: variable request of type com.seatbooking.dto.BookingRequestDTO
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/controller/BookingController.java:[34,24] cannot find symbol
+[ERROR]   symbol:   method getTotalAmount()
+[ERROR]   location: variable booking of type com.seatbooking.entity.Booking
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/controller/BookingController.java:[33,24] cannot find symbol
+[ERROR]   symbol:   method getStatus()
+[ERROR]   location: variable booking of type com.seatbooking.entity.Booking
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/controller/BookingController.java:[32,24] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable booking of type com.seatbooking.entity.Booking
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/service/BookingService.java:[66,34] cannot find symbol
+[ERROR]   symbol:   method getMaxSeatsPerUser()
+[ERROR]   location: variable event of type com.seatbooking.entity.Event
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/service/BookingService.java:[79,16] cannot find symbol
+[ERROR]   symbol:   method setUserId(java.lang.Long)
+[ERROR]   location: variable booking of type com.seatbooking.entity.Booking
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/service/BookingService.java:[81,16] cannot find symbol
+[ERROR]   symbol:   method setEvent(com.seatbooking.entity.Event)
+[ERROR]   location: variable booking of type com.seatbooking.entity.Booking
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/service/BookingService.java:[83,16] cannot find symbol
+[ERROR]   symbol:   method setStatus(java.lang.String)
+[ERROR]   location: variable booking of type com.seatbooking.entity.Booking
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/service/BookingService.java:[85,16] cannot find symbol
+[ERROR]   symbol:   method setCreatedAt(java.time.LocalDateTime)
+[ERROR]   location: variable booking of type com.seatbooking.entity.Booking
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/service/BookingService.java:[92,32] cannot find symbol
+[ERROR]   symbol:   method getZone()
+[ERROR]   location: variable seat of type com.seatbooking.entity.Seat
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/service/BookingService.java:[95,16] cannot find symbol
+[ERROR]   symbol:   method setTotalAmount(double)
+[ERROR]   location: variable booking of type com.seatbooking.entity.Booking
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/service/BookingService.java:[104,24] cannot find symbol
+[ERROR]   symbol:   method setBooking(com.seatbooking.entity.Booking)
+[ERROR]   location: variable bookingSeat of type com.seatbooking.entity.BookingSeat
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/service/BookingService.java:[105,24] cannot find symbol
+[ERROR]   symbol:   method setSeat(com.seatbooking.entity.Seat)
+[ERROR]   location: variable bookingSeat of type com.seatbooking.entity.BookingSeat
+[ERROR] /C:/Users/ASUS LAPTOP/Downloads/seatbooking/seatbooking/src/main/java/com/seatbooking/service/BookingService.java:[109,17] cannot find symbol
+[ERROR]   symbol:   method setStatus(java.lang.String)
+[ERROR]   location: variable seat of type com.seatbooking.entity.Seat
+[ERROR] -> [Help 1]
+org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile (default-compile) on project seatbooking: Compilation failure
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2 (MojoExecutor.java:333)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute (MojoExecutor.java:316)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:212)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:174)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.access$000 (MojoExecutor.java:75)
+    at org.apache.maven.lifecycle.internal.MojoExecutor$1.run (MojoExecutor.java:162)
+    at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute (DefaultMojosExecutionStrategy.java:39)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:159)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:105)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:73)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:53)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:118)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:261)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:173)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:101)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:919)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:285)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:207)
+    at jdk.internal.reflect.DirectMethodHandleAccessor.invoke (DirectMethodHandleAccessor.java:104)
+    at java.lang.reflect.Method.invoke (Method.java:565)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:255)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:201)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:362)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:314)
+Caused by: org.apache.maven.plugin.compiler.CompilationFailureException: Compilation failure
+    at org.apache.maven.plugin.compiler.AbstractCompilerMojo.execute (AbstractCompilerMojo.java:1309)
+    at org.apache.maven.plugin.compiler.CompilerMojo.execute (CompilerMojo.java:215)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:126)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2 (MojoExecutor.java:328)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute (MojoExecutor.java:316)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:212)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:174)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.access$000 (MojoExecutor.java:75)
+    at org.apache.maven.lifecycle.internal.MojoExecutor$1.run (MojoExecutor.java:162)
+    at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute (DefaultMojosExecutionStrategy.java:39)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:159)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:105)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:73)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:53)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:118)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:261)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:173)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:101)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:919)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:285)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:207)
+    at jdk.internal.reflect.DirectMethodHandleAccessor.invoke (DirectMethodHandleAccessor.java:104)
+    at java.lang.reflect.Method.invoke (Method.java:565)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:255)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:201)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:362)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:314)
+[ERROR] 
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
