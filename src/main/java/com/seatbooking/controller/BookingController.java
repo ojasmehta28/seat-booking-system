@@ -5,6 +5,8 @@ import com.seatbooking.dto.BookingResponseDTO;
 import com.seatbooking.entity.Booking;
 import com.seatbooking.service.BookingService;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired; // importing necessary annotations for dependency injection
 import org.springframework.web.bind.annotation.*; //importing necessary annotations for REST controller
 
@@ -19,7 +21,7 @@ public class BookingController {
     @PostMapping
     public BookingResponseDTO createBooking(
 
-        @RequestBody BookingRequestDTO request) {
+    @Valid    @RequestBody BookingRequestDTO request) {
 
             Booking booking= bookingService.createBooking(
                 request.getEventId(),
