@@ -46,7 +46,6 @@ public class BookingService {
     /**
      * Main Booking Workflow
      *
-     * Steps:
      * 1. Fetch Event
      * 2. Validate Booking Window
      * 3. Fetch Seats
@@ -55,8 +54,27 @@ public class BookingService {
      * 6. Lock Seats
      * 7. Create Booking
      * 8. Save Booking
-     * 9. Map Booking ↔ Seats
-     * 10. Mark Seats as BOOKED
+     * 9. Map Booking To Seats
+     *
+     * Current Flow:
+     *
+     * AVAILABLE
+     * ↓
+     * LOCKED
+     * ↓
+     * PAYMENT_PENDING
+     *
+     * Future:
+     *
+     * PAYMENT_PENDING
+     * ↓
+     * CONFIRMED
+     *
+     * OR
+     *
+     * PAYMENT_PENDING
+     * ↓
+     * FAILED
      */
     @Transactional
     public Booking createBooking(
@@ -70,10 +88,6 @@ public class BookingService {
                         new BookingException("Event not found"));
 
         // Step 2 - Validate Booking Window
-        // Checks:
-        // Booking Open Time
-        // Booking Close Time
-        // Event Start Time
         if (!bookingEngine.isBookingAllowed(event)) {
 
             throw new BookingException(
@@ -81,14 +95,10 @@ public class BookingService {
             );
         }
 
-        // Step 3 - Fetch Selected Seats
+        // Step 3 - Fetch Seats
         List<Seat> seats = seatRepository.findAllById(seatIds);
 
-        // Step 4 - Validate Maximum Seat Limit
-        // Example:
-        // Movie -> 10 seats
-        // Cricket -> 8 seats
-        // Concert -> 4 seats
+        // Step 4 - Validate Maximum Seats Allowed
         if (seatIds.size() > event.getMaxSeatsPerUser()) {
 
             throw new BookingException(
@@ -107,18 +117,17 @@ public class BookingService {
         }
 
         // Step 6 - Lock Seats
-        // Prevents another user from booking
-        // the same seats simultaneously
         bookingEngine.lockSeats(seats, userId);
 
         // Step 7 - Create Booking
         Booking booking = new Booking();
 
         booking.setUserId(userId);
+
         booking.setEvent(event);
 
-        
-        booking.setStatus("CONFIRMED");
+        // Payment not completed yet
+        booking.setStatus("PAYMENT_PENDING");
 
         booking.setCreatedAt(LocalDateTime.now());
 
@@ -126,6 +135,7 @@ public class BookingService {
         double totalAmount = 0;
 
         for (Seat seat : seats) {
+
             totalAmount += seat.getZone().getPrice();
         }
 
@@ -140,14 +150,10 @@ public class BookingService {
             BookingSeat bookingSeat = new BookingSeat();
 
             bookingSeat.setBooking(savedBooking);
+
             bookingSeat.setSeat(seat);
 
             bookingSeatRepository.save(bookingSeat);
-
-            // Step 10 - Mark Seat as BOOKED
-            seat.setStatus("BOOKED");
-
-            seatRepository.save(seat);
         }
 
         return savedBooking;
