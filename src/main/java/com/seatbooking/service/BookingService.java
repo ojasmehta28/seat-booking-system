@@ -126,14 +126,14 @@ public class BookingService {
         // Keeping transaction open for 10 seconds
         // so another request can try to access same seat
         
-        try {
+        // try {
         
-            Thread.sleep(10000);
+        //     Thread.sleep(10000);
         
-        } catch (InterruptedException e) {
+        // } catch (InterruptedException e) {
         
-            Thread.currentThread().interrupt();
-        }
+        //     Thread.currentThread().interrupt();
+        // }
 
         // Step 7 - Create Booking
         Booking booking = new Booking();
