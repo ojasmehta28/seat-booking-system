@@ -122,6 +122,19 @@ public class BookingService {
         // Step 6 - Lock Seats
         bookingEngine.lockSeats(seats, userId);
 
+        // TEMPORARY CONCURRENCY TEST
+        // Keeping transaction open for 10 seconds
+        // so another request can try to access same seat
+        
+        try {
+        
+            Thread.sleep(10000);
+        
+        } catch (InterruptedException e) {
+        
+            Thread.currentThread().interrupt();
+        }
+
         // Step 7 - Create Booking
         Booking booking = new Booking();
 
