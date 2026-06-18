@@ -95,8 +95,11 @@ public class BookingService {
             );
         }
 
-        // Step 3 - Fetch Seats
-        List<Seat> seats = seatRepository.findAllById(seatIds);
+        // Step 3 - Fetch Seats with Pessimistic Locking to prevent concurrent modifications 
+        // List<Seat> seats = seatRepository.findAllById(seatIds);
+        List<Seat> seats = seatIds.stream()
+        .map(seatRepository::findSeatForUpdate)
+        .toList();
 
         // Step 4 - Validate Maximum Seats Allowed
         if (seatIds.size() > event.getMaxSeatsPerUser()) {
