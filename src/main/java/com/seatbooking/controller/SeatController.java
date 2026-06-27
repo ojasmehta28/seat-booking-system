@@ -1,31 +1,51 @@
 package com.seatbooking.controller;
 
+import com.seatbooking.dto.SeatRequestDTO;
+import com.seatbooking.dto.SeatResponseDTO;
 import com.seatbooking.entity.Seat;
 import com.seatbooking.service.SeatService;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*; //importing necessary annotations for REST controller and request mapping
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/seats")
-public class SeatController { //seatcontroller used for input and output of seat related operations
+public class SeatController {
 
     @Autowired
     private SeatService seatService;
-    
-    // Create seat
-    @PostMapping
-    public Seat createSeat(@RequestBody Seat seat) {
 
-        return seatService.createSeat(seat);
+    /**
+     * Create a new Seat
+     *
+     * Client sends:
+     * Seat Number
+     * Event ID
+     * Zone ID
+     *
+     * Service performs all business validations.
+     */
+    @PostMapping
+    public SeatResponseDTO createSeat(
+
+            @Valid
+            @RequestBody
+            SeatRequestDTO request) {
+
+        return seatService.createSeat(request);
     }
 
-    
-    // Fetch seats by event
+    /**
+     * Fetch all seats belonging to an Event
+     */
     @GetMapping("/{eventId}")
-    public List<Seat> getSeats(@PathVariable Long eventId) {
+    public List<Seat> getSeats(
+
+            @PathVariable Long eventId) {
 
         return seatService.getSeatsByEvent(eventId);
     }
