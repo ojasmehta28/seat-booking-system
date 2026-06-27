@@ -14,9 +14,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/seats")
-public class SeatController {
+public class SeatController { //handle HTTP requests related to seat operations, such as creating a new seat and fetching seats by event ID
 
-    @Autowired
+    @Autowired 
     private SeatService seatService;
 
     /**

@@ -1,26 +1,40 @@
 package com.seatbooking.dto;
 
-import lombok.Data;
-
-@Data
-public class SeatRequestDTO { 
+public class SeatRequestDTO {
 
     // Seat Number
-    // Example:
-    // A1
-    // A2
-    // B15
     private String seatNumber;
 
-    // Event to which this seat belongs
-    // Example:
-    // Event ID = 3
+    // Event ID
     private Long eventId;
 
-    // Zone of the seat
-    // Example:
-    // VIP
-    // GOLD
-    // SILVER
+    // Zone ID
     private Long zoneId;
+
+    // Getter and Setter for Seat Number
+    public String getSeatNumber() {
+        return seatNumber;
+    }
+
+    public void setSeatNumber(String seatNumber) {
+        this.seatNumber = seatNumber;
+    }
+
+    // Getter and Setter for Event ID
+    public Long getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(Long eventId) {
+        this.eventId = eventId;
+    }
+
+    // Getter and Setter for Zone ID
+    public Long getZoneId() {
+        return zoneId;
+    }
+
+    public void setZoneId(Long zoneId) {
+        this.zoneId = zoneId;
+    }
 }

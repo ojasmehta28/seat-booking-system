@@ -1,20 +1,47 @@
 package com.seatbooking.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+public class SeatResponseDTO {
 
-@Data
-@AllArgsConstructor
-public class SeatResponseDTO { // Sending response to the client after saving the seat
-
-    // Unique ID generated after saving the seat
     private Long seatId;
 
-    // Seat Number
-    // Example: A1, B5
     private String seatNumber;
 
-    // Current status of the seat
-    // AVAILABLE / LOCKED / BOOKED
     private String status;
+
+    public SeatResponseDTO() {
+    }
+
+    public SeatResponseDTO(
+            Long seatId,
+            String seatNumber,
+            String status) {
+
+        this.seatId = seatId;
+        this.seatNumber = seatNumber;
+        this.status = status;
+    }
+
+    public Long getSeatId() {
+        return seatId;
+    }
+
+    public void setSeatId(Long seatId) {
+        this.seatId = seatId;
+    }
+
+    public String getSeatNumber() {
+        return seatNumber;
+    }
+
+    public void setSeatNumber(String seatNumber) {
+        this.seatNumber = seatNumber;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
