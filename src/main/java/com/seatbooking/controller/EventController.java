@@ -1,6 +1,7 @@
 package com.seatbooking.controller;
 
-import com.seatbooking.entity.Event;
+import com.seatbooking.dto.EventRequestDTO;
+import com.seatbooking.dto.EventResponseDTO;
 import com.seatbooking.service.EventService;
 
 import jakarta.validation.Valid;
@@ -12,23 +13,33 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/events")
-public class EventController {
+public class EventController { //Handling HTTP requests related to events, such as creating new events and fetching existing events
 
     @Autowired
     private EventService eventService;
 
-    
-    // Create new event
+    /**
+     * Client sends:
+     * EventRequestDTO
+     *
+     * Returns:
+     * EventResponseDTO
+     */
     @PostMapping
-    public Event createEvent(@Valid @RequestBody Event event) {
+    public EventResponseDTO createEvent(
 
-        return eventService.createEvent(event);
+            @Valid
+            @RequestBody
+            EventRequestDTO request) {
+
+        return eventService.createEvent(request);
     }
 
-    
-    // Fetch all events
+    /**
+     * Fetch All Events
+     */
     @GetMapping
-    public List<Event> getAllEvents() {
+    public List<EventResponseDTO> getAllEvents() {
 
         return eventService.getAllEvents();
     }
