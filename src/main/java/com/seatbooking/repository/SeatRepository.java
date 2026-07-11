@@ -40,4 +40,10 @@ public interface SeatRepository extends JpaRepository<Seat, Long> {
     Seat findSeatForUpdate( 
             @Param("seatId") Long seatId 
         );
+        
+        // Find all seats of a particular Event and Zone
+        List<Seat> findByEventIdAndZoneId(
+                Long eventId,
+                Long zoneId
+        );
 }
