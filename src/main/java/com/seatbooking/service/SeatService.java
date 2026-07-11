@@ -208,7 +208,36 @@ public class SeatService { //seat service used for business logic of seat relate
     
         createdSeats++;
     }
-        
-        return null;
+    
+    
+    // Step 4 - Save all newly generated seats
+    seatRepository.saveAll(newSeats);
+
+    
+    // Step 5 - Prepare response message
+    String message;
+    
+    if (createdSeats == 0) {
+    
+        message = "All requested seats already exist.";
+    
+    } else if (skippedSeats == 0) {
+    
+        message = "All seats created successfully.";
+    
+    } else {
+    
+        message = "Bulk seat generation completed with partial success.";
+    }
+    
+    // Step 6 - Return response
+    return new BulkSeatResponseDTO(
+    
+            createdSeats,
+    
+            skippedSeats,
+    
+            message
+        );
     }
 }
