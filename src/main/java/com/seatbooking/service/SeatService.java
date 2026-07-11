@@ -154,12 +154,60 @@ public class SeatService { //seat service used for business logic of seat relate
                 seat.getSeatNumber()
         );
     }
-    
+        
     // List that will store only newly generated seats
     List<Seat> newSeats =
             new ArrayList<>();
         
         
+        
+    // Counters for summary response
+    int createdSeats = 0;
+    
+    int skippedSeats = 0;
+    
+    // Generate seat numbers
+    for (int seatNumber = request.getStartNumber();
+    
+         seatNumber <= request.getEndNumber();
+    
+         seatNumber++) {
+    
+        // Example:
+        // A + 1 = A1
+        // A + 2 = A2
+        String generatedSeatNumber =
+                request.getSeatPrefix() + seatNumber;
+    
+        // Skip duplicate seats
+        if (existingSeatNumbers.contains(
+                generatedSeatNumber)) {
+    
+            skippedSeats++;
+    
+            continue;
+        }
+    
+        // Create new Seat entity
+        Seat seat = new Seat();
+    
+        seat.setSeatNumber(generatedSeatNumber);
+    
+        seat.setStatus("AVAILABLE");
+    
+        seat.setLockedByUser(null);
+    
+        seat.setLockExpiryTime(null);
+    
+        seat.setEvent(event);
+    
+        seat.setZone(zone);
+    
+        // Store inside list
+        newSeats.add(seat);
+    
+        createdSeats++;
+    }
         
         return null;
     }
