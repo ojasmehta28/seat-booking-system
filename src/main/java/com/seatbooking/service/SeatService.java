@@ -13,6 +13,13 @@ import com.seatbooking.repository.ZoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.seatbooking.dto.BulkSeatRequestDTO;
+import com.seatbooking.dto.BulkSeatResponseDTO;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import java.util.ArrayList;
 
 import java.util.List;
 
@@ -91,5 +98,69 @@ public class SeatService { //seat service used for business logic of seat relate
     public List<Seat> getSeatsByEvent(Long eventId) {
 
         return seatRepository.findByEventId(eventId);
+    }
+
+    /**
+     * Generate multiple seats in one request
+     *
+     * Workflow
+     * 1. Validate Event
+     * 2. Validate Zone
+     * 3. Fetch Existing Seats
+     * 4. Generate New Seats
+     * 5. Save All Seats
+     * 6. Return Summary
+     */
+    @Transactional
+    public BulkSeatResponseDTO generateSeatsInBulk( //generates multiple seats in one request and returns a summary of the operation
+            BulkSeatRequestDTO request) {
+    
+    // Step 1 - Validate Event
+    Event event = eventRepository.findById(
+    
+            request.getEventId()
+    
+    ).orElseThrow(() ->
+    
+            new BookingException(
+                    "Event not found")
+    );
+    
+    // Step 2 - Validate Zone
+    Zone zone = zoneRepository.findById(
+    
+            request.getZoneId()
+    
+    ).orElseThrow(() ->
+    
+            new BookingException(
+                    "Zone not found")
+    );
+
+        // Step 3 - Fetch all existing seats
+    List<Seat> existingSeats = seatRepository
+            .findByEventIdAndZoneId(
+                    request.getEventId(),
+                    request.getZoneId()
+            );
+    
+    // Store existing seat numbers inside a HashSet for fast lookup
+    Set<String> existingSeatNumbers =
+            new HashSet<>();
+    
+    for (Seat seat : existingSeats) {
+    
+        existingSeatNumbers.add(
+                seat.getSeatNumber()
+        );
+    }
+    
+    // List that will store only newly generated seats
+    List<Seat> newSeats =
+            new ArrayList<>();
+        
+        
+        
+        return null;
     }
 }
