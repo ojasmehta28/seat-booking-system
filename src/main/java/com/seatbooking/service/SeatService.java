@@ -211,11 +211,11 @@ public class SeatService { //seat service used for business logic of seat relate
     
     
     // Step 4 - Save all newly generated seats
-    seatRepository.saveAll(newSeats);
+    seatRepository.saveAll(newSeats); //save all the newly generated seats in one go, which is more efficient than saving them one by one.
 
     
     // Step 5 - Prepare response message
-    String message;
+    String message; //Generate a message based on the number of created and skipped seats. If no seats were created, it indicates that all requested seats already exist. If no seats were skipped, it indicates that all seats were created successfully. Otherwise, it indicates that the bulk seat generation completed with partial success.
     
     if (createdSeats == 0) {
     

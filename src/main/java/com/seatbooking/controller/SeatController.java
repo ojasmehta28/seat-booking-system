@@ -9,6 +9,8 @@ import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.seatbooking.dto.BulkSeatRequestDTO;
+import com.seatbooking.dto.BulkSeatResponseDTO;
 
 import java.util.List;
 
@@ -42,11 +44,44 @@ public class SeatController { //handle HTTP requests related to seat operations,
     /**
      * Fetch all seats belonging to an Event
      */
+
     @GetMapping("/{eventId}")
     public List<Seat> getSeats(
 
             @PathVariable Long eventId) {
 
         return seatService.getSeatsByEvent(eventId);
+    }
+
+    
+    /**
+     * Generate multiple seats in one request
+     *
+     * Client sends:
+     * Seat Prefix
+     * Start Number
+     * End Number
+     * Event ID
+     * Zone ID
+     *
+     * Example:
+     * Prefix = A
+     * Start = 1
+     * End = 100
+     *
+     * Service performs:
+     * Validation
+     * Duplicate Checking
+     * Bulk Creation
+     */
+
+    @PostMapping("/bulk")
+    public BulkSeatResponseDTO generateSeatsInBulk( // handles the HTTP POST request to generate multiple seats in bulk for a specific event and zone, and returns a summary of the operation
+    
+            @Valid
+            @RequestBody
+            BulkSeatRequestDTO request) {
+    
+        return seatService.generateSeatsInBulk(request);
     }
 }
