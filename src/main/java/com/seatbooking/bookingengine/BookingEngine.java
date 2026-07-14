@@ -1,11 +1,15 @@
 package com.seatbooking.bookingengine;
 
+
 import com.seatbooking.entity.Event;
 import com.seatbooking.entity.Seat;
 import com.seatbooking.repository.SeatRepository;
+import com.seatbooking.bookingengine.PricingEngine;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,6 +19,9 @@ public class BookingEngine {
 
     @Autowired
     private SeatRepository seatRepository;
+
+    @Autowired
+    private PricingEngine pricingEngine;
 
     //Validate booking window
     public boolean isBookingAllowed(Event event){

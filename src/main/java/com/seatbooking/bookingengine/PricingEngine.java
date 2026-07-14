@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Component
-public class PricingEngine {
+public class PricingEngine { //Pricing logic can be complex and may require its own dedicated class to handle various pricing rules and calculations
 
     /**
      * Calculates total booking amount.

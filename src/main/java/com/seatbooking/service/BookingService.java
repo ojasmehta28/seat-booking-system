@@ -11,10 +11,15 @@ import com.seatbooking.repository.BookingRepository;
 import com.seatbooking.repository.BookingSeatRepository;
 import com.seatbooking.repository.EventRepository;
 import com.seatbooking.repository.SeatRepository;
+import com.seatbooking.bookingengine.PricingEngine;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.seatbooking.bookingengine.PricingEngine;
+
+import java.math.BigDecimal;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -38,6 +43,9 @@ public class BookingService {
 
     @Autowired
     private BookingSeatRepository bookingSeatRepository;
+
+    @Autowired
+    private PricingEngine pricingEngine;
 
     BookingService(SeatbookingApplication seatbookingApplication) {
         this.seatbookingApplication = seatbookingApplication;
@@ -148,14 +156,23 @@ public class BookingService {
         booking.setCreatedAt(LocalDateTime.now());
 
         // Calculate Total Amount
-        double totalAmount = 0;
+        // double totalAmount = 0;
 
-        for (Seat seat : seats) {
+        // for (Seat seat : seats) {
 
-            totalAmount += seat.getZone().getPrice();
-        }
+        //     totalAmount += seat.getZone().getPrice();
+        // }
 
-        booking.setTotalAmount(totalAmount);
+        // booking.setTotalAmount(totalAmount);
+
+        // Calculate Total Amount
+        BigDecimal totalAmount =
+                pricingEngine.calculateTotalAmount(seats); //if pricing logic changes in future, we can just update the PricingEngine class without changing BookingService
+        
+        // Set Total Amount in Booking
+        booking.setTotalAmount(
+                totalAmount.doubleValue()
+        );
 
         // Step 8 - Save Booking
         Booking savedBooking = bookingRepository.save(booking);
