@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 public class SeatUnlockScheduler {
 
-    @Autowired
+    @Autowired 
     private SeatRepository seatRepository;
 
     /**
