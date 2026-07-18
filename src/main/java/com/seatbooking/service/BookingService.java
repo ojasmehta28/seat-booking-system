@@ -119,14 +119,39 @@ public class BookingService {
                 .toList();
 
         // -------------------------------------------------
-        // Step 4 - Validate Maximum Seats Per User
+        // Step 4 - Validate Total Seats Per User
+        //
+        // Business Rule:
+        //
+        // Suppose maximum seats allowed = 5
+        //
+        // Booking 1 -> 3 seats
+        // Booking 2 -> 3 seats
+        //
+        // Total = 6
+        //
+        // Current request alone is not enough.
+        // We must also consider seats already booked
+        // by the same user for the same event.
         // -------------------------------------------------
-        if (seatIds.size() > event.getMaxSeatsPerUser()) {
-
+        
+        long alreadyBookedSeats =
+                bookingRepository.countBookedSeatsByUserAndEvent(
+                        userId,
+                        eventId
+                );
+        
+        if (alreadyBookedSeats + seatIds.size()
+                > event.getMaxSeatsPerUser()) {
+        
+            long remainingSeats =
+                    event.getMaxSeatsPerUser()
+                            - alreadyBookedSeats;
+        
             throw new BookingException(
-                    "Maximum "
-                            + event.getMaxSeatsPerUser()
-                            + " seats can be booked for this event");
+                    "Booking limit exceeded. You can book only "
+                            + remainingSeats
+                            + " more seat(s) for this event.");
         }
 
         // -------------------------------------------------
