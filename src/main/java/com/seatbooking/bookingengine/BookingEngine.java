@@ -7,6 +7,7 @@ import com.seatbooking.repository.BookingRepository;
 import com.seatbooking.repository.SeatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import com.seatbooking.enums.SeatStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,10 +21,7 @@ public class BookingEngine {
     @Autowired
     private BookingRepository bookingRepository;
 
-    /**
-     * Validates whether booking is currently allowed.
-     *
-     * Rules:
+    /*
      * 1. Booking should be opened.
      * 2. Booking should not be closed.
      * 3. Event should not have started.
@@ -89,7 +87,7 @@ public class BookingEngine {
 
         for (Seat seat : seats) {
 
-            if (!"AVAILABLE".equals(seat.getStatus())) {
+           if (seat.getStatus() != SeatStatus.AVAILABLE) { //status field is of type SeatStatus enum 
 
                 throw new BookingException(
                         "One or more selected seats are not available.");
@@ -109,7 +107,7 @@ public class BookingEngine {
 
         for (Seat seat : seats) {
 
-            seat.setStatus("LOCKED");
+            seat.setStatus(SeatStatus.LOCKED);
 
             seat.setLockedByUser(userId);
 

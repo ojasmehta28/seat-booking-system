@@ -11,6 +11,7 @@ import com.seatbooking.repository.BookingRepository;
 import com.seatbooking.repository.BookingSeatRepository;
 import com.seatbooking.repository.EventRepository;
 import com.seatbooking.repository.SeatRepository;
+import com.seatbooking.enums.BookingStatus;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -95,7 +96,7 @@ public class BookingService {
 
         booking.setEvent(event);
 
-        booking.setStatus("PAYMENT_PENDING");
+        booking.setStatus(BookingStatus.PAYMENT_PENDING); //status field in Booking entity is of type BookingStatus enum
 
         booking.setCreatedAt(LocalDateTime.now());
 

@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
+import com.seatbooking.enums.BookingStatus;
+
 @Entity
 @Table(name = "booking")
 // @Data
@@ -28,11 +30,11 @@ public class Booking {
         this.userId = userId;
     }
 
-    public String getStatus() {
+    public BookingStatus getStatus() { //status field is of type BookingStatus enum
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(BookingStatus status) { //it is an enum type and we want to store the enum value in the database as a string
         this.status = status;
     }
 
@@ -66,7 +68,17 @@ public class Booking {
 
     private Long userId;
 
-    private String status; // PENDING / CONFIRMED / FAILED
+    /*
+     * Current booking status.
+     *
+     * EnumType.STRING stores enum names inside the database.
+     * EnumType.ORDINAL stores enum ordinal values inside the database.
+     * PAYMENT_PENDING
+     * CONFIRMED
+     * FAILED
+     */
+    @Enumerated(EnumType.STRING)
+    private BookingStatus status; 
 
     private Double totalAmount;
 

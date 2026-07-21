@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 // import lombok.*;
 
 import java.time.LocalDateTime;
+import com.seatbooking.enums.SeatStatus;
 
 @Entity
 @Table(name = "seat",
@@ -29,11 +30,11 @@ public class Seat {
         this.seatNumber = seatNumber;
     }
 
-    public String getStatus() {
+    public SeatStatus getStatus() { //status field is of type SeatStatus enum
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(SeatStatus status) { //it is an enum type and we want to store the enum value in the database as a string
         this.status = status;
     }
 
@@ -74,8 +75,9 @@ public class Seat {
     private Long id;
 
     private String seatNumber; // Unique seat number within an event
- 
-    private String status; // AVAILABLE / LOCKED / BOOKED
+    
+    @Enumerated(EnumType.STRING)
+    private SeatStatus status; // AVAILABLE / LOCKED / BOOKED
 
     private Long lockedByUser; // User ID who has locked the seat
 
