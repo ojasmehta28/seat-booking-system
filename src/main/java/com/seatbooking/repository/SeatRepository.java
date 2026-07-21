@@ -4,6 +4,7 @@ import com.seatbooking.entity.Seat;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import com.seatbooking.enums.SeatStatus; //import the SeatStatus enum to use in the repository methods
 
 import jakarta.persistence.LockModeType; //specify the type of lock to be used in database operations
 import org.springframework.data.jpa.repository.Lock; //specify a lock mode to be used in database operations
@@ -20,14 +21,14 @@ public interface SeatRepository extends JpaRepository<Seat, Long> {
     List<Seat> findByEventId(Long eventId);
 
     // Find seats by event and status
-    List<Seat> findByEventIdAndStatus(Long eventId, String status);
+    List<Seat> findByEventIdAndStatus(Long eventId, SeatStatus status);
 
     // Find expired locked seats
     // Example:
     // Status = LOCKED
     // Lock Expiry Time < Current Time
     List<Seat> findByStatusAndLockExpiryTimeBefore(
-            String status,
+            SeatStatus status,
             LocalDateTime currentTime
     );
 

@@ -2,6 +2,7 @@ package com.seatbooking.scheduler;
 
 import com.seatbooking.entity.Seat;
 import com.seatbooking.repository.SeatRepository;
+import com.seatbooking.enums.SeatStatus;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -30,13 +31,13 @@ public class SeatUnlockScheduler {
 
         List<Seat> expiredSeats =
                 seatRepository.findByStatusAndLockExpiryTimeBefore(
-                        "LOCKED",
+                        SeatStatus.LOCKED,
                         LocalDateTime.now()
                 );
 
         for (Seat seat : expiredSeats) {
 
-            seat.setStatus("AVAILABLE");
+            seat.setStatus(SeatStatus.AVAILABLE);
 
             seat.setLockedByUser(null);
 

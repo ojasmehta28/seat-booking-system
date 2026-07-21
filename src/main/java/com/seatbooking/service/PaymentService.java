@@ -7,6 +7,7 @@ import com.seatbooking.exception.BookingException;
 import com.seatbooking.repository.BookingRepository;
 import com.seatbooking.repository.BookingSeatRepository;
 import com.seatbooking.repository.SeatRepository;
+import com.seatbooking.enums.BookingStatus;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,7 +52,7 @@ public class PaymentService {
             );
         }
 
-        booking.setStatus("CONFIRMED");
+        booking.setStatus(BookingStatus.CONFIRMED);
 
         bookingRepository.save(booking);
 
@@ -62,7 +63,7 @@ public class PaymentService {
 
             Seat seat = bookingSeat.getSeat();
 
-            seat.setStatus("BOOKED");
+            seat.setStatus(BookingStatus.BOOKED);
 
             seat.setLockedByUser(null);
 
