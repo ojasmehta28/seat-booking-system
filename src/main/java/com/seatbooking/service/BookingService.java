@@ -47,23 +47,23 @@ public class BookingService {
             Long userId,
             List<Long> seatIds) {
 
-        // -------------------------------------------------
+        
         // Step 1 - Fetch Event
-        // -------------------------------------------------
+        
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() ->
                         new BookingException("Event not found"));
 
-        // -------------------------------------------------
+        
         // Step 2 - Fetch Seats
-        // -------------------------------------------------
+        
         List<Seat> seats = seatIds.stream()
                 .map(seatRepository::findSeatForUpdate)
                 .toList();
 
-        // -------------------------------------------------
+        
         // Step 3 - Booking Validations
-        // -------------------------------------------------
+        
         bookingEngine.validateBookingWindow(event);
 
         bookingEngine.validateBookingLimit(
@@ -73,22 +73,22 @@ public class BookingService {
 
         bookingEngine.validateSeatAvailability(seats);
 
-        // -------------------------------------------------
+        
         // Step 4 - Lock Seats
-        // -------------------------------------------------
+        
         bookingEngine.lockSeats(
                 seats,
                 userId);
 
-        // -------------------------------------------------
+        
         // Step 5 - Calculate Total Amount
-        // -------------------------------------------------
+        
         BigDecimal totalAmount =
                 pricingEngine.calculateTotalAmount(seats);
 
-        // -------------------------------------------------
+        
         // Step 6 - Create Booking
-        // -------------------------------------------------
+        
         Booking booking = new Booking();
 
         booking.setUserId(userId);
@@ -102,15 +102,15 @@ public class BookingService {
         booking.setTotalAmount(
                 totalAmount.doubleValue());
 
-        // -------------------------------------------------
+        
         // Step 7 - Save Booking
-        // -------------------------------------------------
+        
         Booking savedBooking =
                 bookingRepository.save(booking);
 
-        // -------------------------------------------------
+        
         // Step 8 - Save Booking Seats
-        // -------------------------------------------------
+        
         for (Seat seat : seats) {
 
             BookingSeat bookingSeat =
