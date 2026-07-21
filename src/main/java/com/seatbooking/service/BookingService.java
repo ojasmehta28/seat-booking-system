@@ -41,46 +41,6 @@ public class BookingService {
     @Autowired
     private BookingSeatRepository bookingSeatRepository;
 
-    /**
-     * Main Booking Workflow
-     *
-     * Workflow
-     * ----------------------------------------------------
-     * 1. Fetch Event
-     * 2. Validate Booking Window
-     * 3. Fetch Seats with Pessimistic Lock
-     * 4. Validate Maximum Seats Per User
-     * 5. Validate Seat Availability
-     * 6. Lock Seats
-     * 7. Calculate Total Amount
-     * 8. Create Booking
-     * 9. Save Booking
-     * 10. Create Booking ↔ Seat Mapping
-     *
-     * Current Seat Flow
-     *
-     * AVAILABLE
-     *      ↓
-     * LOCKED
-     *      ↓
-     * PAYMENT_PENDING
-     *
-     * Future
-     *
-     * PAYMENT_PENDING
-     *      ↓
-     * PAYMENT_SUCCESS
-     *      ↓
-     * BOOKED
-     *
-     * OR
-     *
-     * PAYMENT_PENDING
-     *      ↓
-     * PAYMENT_FAILED
-     *      ↓
-     * AVAILABLE
-     */
     @Transactional
     public Booking createBooking(
             Long eventId,
@@ -95,111 +55,39 @@ public class BookingService {
                         new BookingException("Event not found"));
 
         // -------------------------------------------------
-        // Step 2 - Validate Booking Window
-        // BookingEngine decides whether booking is allowed
-        // based on Event timings.
-        // -------------------------------------------------
-        if (!bookingEngine.isBookingAllowed(event)) {
-
-            throw new BookingException(
-                    "Booking is currently not allowed for this event");
-        }
-
-        // -------------------------------------------------
-        // Step 3 - Fetch Seats
-        //
-        // We fetch every requested seat using
-        // PESSIMISTIC_WRITE locking.
-        //
-        // This prevents two users from booking
-        // the same seat simultaneously.
+        // Step 2 - Fetch Seats
         // -------------------------------------------------
         List<Seat> seats = seatIds.stream()
                 .map(seatRepository::findSeatForUpdate)
                 .toList();
 
         // -------------------------------------------------
-        // Step 4 - Validate Total Seats Per User
-        //
-        // Business Rule:
-        //
-        // Suppose maximum seats allowed = 5
-        //
-        // Booking 1 -> 3 seats
-        // Booking 2 -> 3 seats
-        //
-        // Total = 6
-        //
-        // Current request alone is not enough.
-        // We must also consider seats already booked
-        // by the same user for the same event.
+        // Step 3 - Booking Validations
         // -------------------------------------------------
-        
-        long alreadyBookedSeats =
-                bookingRepository.countBookedSeatsByUserAndEvent(
-                        userId,
-                        eventId
-                );
-        
-        if (alreadyBookedSeats + seatIds.size()
-                > event.getMaxSeatsPerUser()) {
-        
-            long remainingSeats =
-                    event.getMaxSeatsPerUser()
-                            - alreadyBookedSeats;
-        
-            throw new BookingException(
-                    "Booking limit exceeded. You can book only "
-                            + remainingSeats
-                            + " more seat(s) for this event.");
-        }
+        bookingEngine.validateBookingWindow(event);
+
+        bookingEngine.validateBookingLimit(
+                userId,
+                event,
+                seatIds.size());
+
+        bookingEngine.validateSeatAvailability(seats);
 
         // -------------------------------------------------
-        // Step 5 - Validate Seat Availability
+        // Step 4 - Lock Seats
         // -------------------------------------------------
-        if (!bookingEngine.areSeatAvailable(seats)) {
-
-            throw new BookingException(
-                    "One or more selected seats are not available");
-        }
+        bookingEngine.lockSeats(
+                seats,
+                userId);
 
         // -------------------------------------------------
-        // Step 6 - Lock Seats
-        //
-        // Seats are temporarily locked so that
-        // another user cannot book them while
-        // payment is in progress.
-        // -------------------------------------------------
-        bookingEngine.lockSeats(seats, userId);
-
-        // -------------------------------------------------
-        // Step 7 - Calculate Total Booking Amount
-        //
-        // BookingService should NEVER know
-        // how prices are calculated.
-        //
-        // PricingEngine is responsible for
-        // every pricing-related business rule.
-        //
-        // Current Rule
-        // ------------
-        // Sum of all selected seat prices.
-        //
-        // Future Rules
-        // ------------
-        // Coupon
-        // Festival Discount
-        // Membership Discount
-        // Corporate Discount
-        // GST
-        // Convenience Fee
-        // Dynamic Pricing
+        // Step 5 - Calculate Total Amount
         // -------------------------------------------------
         BigDecimal totalAmount =
                 pricingEngine.calculateTotalAmount(seats);
 
         // -------------------------------------------------
-        // Step 8 - Create Booking
+        // Step 6 - Create Booking
         // -------------------------------------------------
         Booking booking = new Booking();
 
@@ -207,37 +95,21 @@ public class BookingService {
 
         booking.setEvent(event);
 
-        // Payment is not completed yet.
         booking.setStatus("PAYMENT_PENDING");
 
         booking.setCreatedAt(LocalDateTime.now());
 
-        // Booking entity currently stores Double.
-        //
-        // PricingEngine already works with
-        // BigDecimal because financial values
-        // require exact precision.
-        //
-        // This conversion is temporary.
-        //
-        // Later the Booking entity itself
-        // will also use BigDecimal.
         booking.setTotalAmount(
                 totalAmount.doubleValue());
 
         // -------------------------------------------------
-        // Step 9 - Save Booking
+        // Step 7 - Save Booking
         // -------------------------------------------------
         Booking savedBooking =
                 bookingRepository.save(booking);
 
         // -------------------------------------------------
-        // Step 10 - Create Booking ↔ Seat Mapping
-        //
-        // Each selected seat gets one mapping
-        // with the booking.
-        // This allows one booking to contain
-        // multiple seats.
+        // Step 8 - Save Booking Seats
         // -------------------------------------------------
         for (Seat seat : seats) {
 
