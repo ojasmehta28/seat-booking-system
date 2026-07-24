@@ -48,9 +48,12 @@ public class SeatUnlockScheduler {
 
         if (!expiredSeats.isEmpty()) {
 
-            System.out.println(
-                    expiredSeats.size()
-                            + " expired seat locks released."
+            private static final Logger logger =
+            LoggerFactory.getLogger(SeatUnlockScheduler.class);
+
+            logger.info(
+                "{} expired seat locks released.",
+                expiredSeats.size()
             );
         }
     }
