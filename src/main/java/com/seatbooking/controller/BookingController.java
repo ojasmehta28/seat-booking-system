@@ -32,7 +32,7 @@ public class BookingController {
             return new BookingResponseDTO(
 
                 booking.getId(),
-                booking.getStatus().name(),
+                booking.getStatus(),
                 booking.getTotalAmount()
             );
 

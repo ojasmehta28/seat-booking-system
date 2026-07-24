@@ -34,7 +34,8 @@ public class Seat {
         return status;
     }
 
-    public void setStatus(SeatStatus status) { //it is an enum type and we want to store the enum value in the database as a string
+    public void setStatus(SeatStatus status) { // BookingStatus is stored as its enum name (e.g. PAYMENT_PENDING)
+                                               // instead of its ordinal value (0, 1, 2) in the database.
         this.status = status;
     }
 

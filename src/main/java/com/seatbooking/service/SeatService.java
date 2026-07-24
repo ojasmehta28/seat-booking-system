@@ -89,7 +89,7 @@ public class SeatService { //seat service used for business logic of seat relate
 
                 savedSeat.getSeatNumber(),
 
-                savedSeat.getStatus().name()
+                savedSeat.getStatus()
         );
     }
 

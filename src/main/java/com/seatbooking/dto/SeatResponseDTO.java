@@ -1,12 +1,14 @@
 package com.seatbooking.dto;
 
+import com.seatbooking.enums.SeatStatus;
+
 public class SeatResponseDTO {
 
     private Long seatId;
 
     private String seatNumber;
 
-    private String status;
+    private SeatStatus status;
 
     public SeatResponseDTO() {
     }
@@ -14,7 +16,7 @@ public class SeatResponseDTO {
     public SeatResponseDTO(
             Long seatId,
             String seatNumber,
-            String status) {
+            SeatStatus status) {
 
         this.seatId = seatId;
         this.seatNumber = seatNumber;
@@ -37,11 +39,11 @@ public class SeatResponseDTO {
         this.seatNumber = seatNumber;
     }
 
-    public String getStatus() {
+    public SeatStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(SeatStatus status) {
         this.status = status;
     }
 }

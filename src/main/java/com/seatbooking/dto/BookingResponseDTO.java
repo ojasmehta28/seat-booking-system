@@ -1,5 +1,7 @@
 package com.seatbooking.dto;
 
+import com.seatbooking.enums.BookingStatus;
+
 // import lombok.AllArgsConstructor;
 // import lombok.Data;
 
@@ -10,7 +12,7 @@ public class BookingResponseDTO { // DTO class to represent the response of a bo
 
     private Long bookingId; // ID of the booking
 
-    private String status; // Status of the booking (e.g., "CONFIRMED", "FAILED")
+    private BookingStatus status; // Status of the booking (e.g., PAYMENT_PENDING, BOOKED, CANCELLED)
 
     private Double totalAmount; // Total amount for the booking
 
@@ -22,11 +24,11 @@ public class BookingResponseDTO { // DTO class to represent the response of a bo
         this.bookingId = bookingId;
     }
 
-    public String getStatus() {
+    public BookingStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(BookingStatus status) {
         this.status = status;
     }
 
@@ -38,7 +40,7 @@ public class BookingResponseDTO { // DTO class to represent the response of a bo
         this.totalAmount = totalAmount;
     }
 public BookingResponseDTO(Long bookingId,
-                          String status,
+                          BookingStatus status,
                           Double totalAmount) {
 
     this.bookingId = bookingId;
