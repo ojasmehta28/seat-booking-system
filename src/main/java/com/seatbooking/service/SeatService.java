@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.seatbooking.dto.BulkSeatRequestDTO;
 import com.seatbooking.dto.BulkSeatResponseDTO;
+import com.seatbooking.enums.SeatStatus;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -70,7 +71,7 @@ public class SeatService { //seat service used for business logic of seat relate
 
         // Step 4 - Initialize default values
         // Every newly created seat starts as AVAILABLE
-        seat.setStatus("AVAILABLE");
+        seat.setStatus(SeatStatus.AVAILABLE);
 
         // No user has locked this seat yet
         seat.setLockedByUser(null);
@@ -88,7 +89,7 @@ public class SeatService { //seat service used for business logic of seat relate
 
                 savedSeat.getSeatNumber(),
 
-                savedSeat.getStatus()
+                savedSeat.getStatus().name()
         );
     }
 
@@ -193,7 +194,7 @@ public class SeatService { //seat service used for business logic of seat relate
     
         seat.setSeatNumber(generatedSeatNumber);
     
-        seat.setStatus("AVAILABLE");
+        seat.setStatus(SeatStatus.AVAILABLE);
     
         seat.setLockedByUser(null);
     

@@ -8,6 +8,7 @@ import com.seatbooking.repository.BookingRepository;
 import com.seatbooking.repository.BookingSeatRepository;
 import com.seatbooking.repository.SeatRepository;
 import com.seatbooking.enums.BookingStatus;
+import com.seatbooking.enums.SeatStatus;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,12 +46,12 @@ public class PaymentService {
                 .orElseThrow(() ->
                         new BookingException("Booking not found"));
 
-        if (!booking.getStatus().equals("PAYMENT_PENDING")) {
-
-            throw new BookingException(
-                    "Booking is not waiting for payment"
-            );
-        }
+            if (booking.getStatus() != BookingStatus.PAYMENT_PENDING) {
+    
+        throw new BookingException(
+                "Booking is not waiting for payment"
+        );
+    }
 
         booking.setStatus(BookingStatus.CONFIRMED);
 
@@ -63,8 +64,8 @@ public class PaymentService {
 
             Seat seat = bookingSeat.getSeat();
 
-            seat.setStatus(BookingStatus.BOOKED);
-
+            seat.setStatus(SeatStatus.BOOKED);
+            
             seat.setLockedByUser(null);
 
             seat.setLockExpiryTime(null);
