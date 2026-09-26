@@ -8,15 +8,15 @@ import org.springframework.data.repository.query.Param;
 public interface BookingRepository extends JpaRepository<Booking, Long> { 
 
     @Query("""
-            SELECT COUNT(bs)
-            FROM BookingSeat bs
-            WHERE bs.booking.userId = :userId 
-              AND bs.booking.event.id = :eventId
-              AND bs.booking.status = 'PAYMENT_PENDING'
-            """)
-    long countBookedSeatsByUserAndEvent(
-            @Param("userId") Long userId,
-            @Param("eventId") Long eventId
-    );
+        SELECT COUNT(bs)
+        FROM BookingSeat bs
+        WHERE bs.booking.userId = :userId
+          AND bs.booking.event.id = :eventId
+          AND bs.booking.status IN ('PAYMENT_PENDING', 'CONFIRMED')
+        """)
+long countBookedSeatsByUserAndEvent(
+        @Param("userId") Long userId,
+        @Param("eventId") Long eventId
+);
 
 }

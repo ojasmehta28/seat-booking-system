@@ -13,4 +13,6 @@ public interface BookingSeatRepository
 
     // Find all seat mappings for a booking
     List<BookingSeat> findByBookingId(Long bookingId);
+
+    List<BookingSeat> findBySeatId(Long seatId);
 }

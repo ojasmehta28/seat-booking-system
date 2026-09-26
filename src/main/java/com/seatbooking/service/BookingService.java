@@ -58,7 +58,12 @@ public class BookingService {
         
         // Step 2 - Fetch Seats
         
-        List<Seat> seats = seatIds.stream()
+        List<Long> sortedSeatIds = seatIds.stream()
+                .distinct()
+                .sorted()
+                .toList();
+
+        List<Seat> seats = sortedSeatIds.stream()
                 .map(seatRepository::findSeatForUpdate)
                 .toList();
 
@@ -70,7 +75,7 @@ public class BookingService {
         bookingEngine.validateBookingLimit(
                 userId,
                 event,
-                seatIds.size());
+                sortedSeatIds.size());
 
         bookingEngine.validateSeatAvailability(seats);
 
