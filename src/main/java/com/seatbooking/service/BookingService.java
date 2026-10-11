@@ -47,6 +47,18 @@ public class BookingService {
             Long eventId,
             Long userId,
             List<Long> seatIds) {
+        
+        if (seatIds == null || seatIds.isEmpty()) {
+            throw new BookingException(
+                    "At least one seat must be selected."
+            );
+        }
+        
+        if (seatIds.stream().anyMatch(id -> id == null)) {
+            throw new BookingException(
+                    "Seat IDs cannot contain null values."
+            );
+        }        
 
         
         // Step 1 - Fetch Event
@@ -56,17 +68,36 @@ public class BookingService {
                         new BookingException("Event not found"));
 
         
-        // Step 2 - Fetch Seats
+        
+        
+        // Step 2 - Fetch and validate Seats
         
         List<Long> sortedSeatIds = seatIds.stream()
                 .distinct()
                 .sorted()
                 .toList();
-
+        
         List<Seat> seats = sortedSeatIds.stream()
                 .map(seatRepository::findSeatForUpdate)
                 .toList();
-
+        
+        // Reject nonexistent seat IDs
+        if (seats.stream().anyMatch(seat -> seat == null)) {
+            throw new BookingException(
+                    "One or more selected seats do not exist."
+            );
+        }
+        
+        // Reject seats belonging to a different event
+        if (seats.stream().anyMatch(
+        seat -> seat.getEvent() == null
+                || !eventId.equals(seat.getEvent().getId()))) {
+        
+            throw new BookingException(
+                    "One or more selected seats do not belong to this event."
+            );
+        }
+        
         
         // Step 3 - Booking Validations
         
